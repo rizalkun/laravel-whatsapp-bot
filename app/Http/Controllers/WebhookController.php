@@ -18,12 +18,10 @@ class WebhookController extends Controller
             if ($request->header('X-Zuwinda-Signature') == $signature) {
                 $data = $json->data;
                 if ($data->event == "MESSAGE_RECEIVED") {
-                    if ($data->to == env('ZUWINDA_SENDER_NUMBER', 'Your Sender number')) {
-                        if ($data->content == "!halo") {
-                            $zuwinda->sendMessage($data->instances_id, $data->from, 'Halo zuwinda 🥳');
-                        } else if ($data->content == "!bye") {
-                            $zuwinda->sendMessage($data->instances_id, $data->from, 'Selamat tinggal 🥺');
-                        }
+                    if ($data->content == "!halo") {
+                        $zuwinda->sendMessage($data->instances_id, $data->from, 'Halo zuwinda 🥳');
+                    } else if ($data->content == "!bye") {
+                        $zuwinda->sendMessage($data->instances_id, $data->from, 'Selamat tinggal 🥺');
                     }
                 }
             }
